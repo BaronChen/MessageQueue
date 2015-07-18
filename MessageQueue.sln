@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageQueue.Web", "MessageQueue.Web\MessageQueue.Web.csproj", "{C7AECD17-1A12-4121-AFA0-C936F6F99034}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageQueue.Api", "MessageQueue.Api\MessageQueue.Api.csproj", "{B9CEF3F4-0A78-4D39-9B9B-1DB52399D3FB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C7AECD17-1A12-4121-AFA0-C936F6F99034}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7AECD17-1A12-4121-AFA0-C936F6F99034}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7AECD17-1A12-4121-AFA0-C936F6F99034}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7AECD17-1A12-4121-AFA0-C936F6F99034}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9CEF3F4-0A78-4D39-9B9B-1DB52399D3FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9CEF3F4-0A78-4D39-9B9B-1DB52399D3FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9CEF3F4-0A78-4D39-9B9B-1DB52399D3FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9CEF3F4-0A78-4D39-9B9B-1DB52399D3FB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
