@@ -6,3 +6,4 @@
 /MessageQueue.Web/node_modules
 /MessageQueue.Api/bin
 /MessageQueue.Api/obj
+/MessageQueue.Api/App_Data
