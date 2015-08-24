@@ -10,7 +10,7 @@ namespace MessageQueue.Api.Models
 	{
 		public static void Confiure(Container container)
 		{
-			container.RegisterWebApiRequest<MyDbContext>();
+			container.Register<MyDbContext>();
 		}
 	}
 }

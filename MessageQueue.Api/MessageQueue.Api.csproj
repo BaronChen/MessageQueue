@@ -135,7 +135,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="DI\" />
     <Folder Include="Views\JobQueue\" />
   </ItemGroup>
   <ItemGroup>
@@ -173,7 +172,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\ProcessController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -185,12 +184,23 @@
     <Compile Include="Migrations\201507190324508_AddCompletedDateTime.Designer.cs">
       <DependentUpon>201507190324508_AddCompletedDateTime.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508090031324_ChangeJobModel.cs" />
+    <Compile Include="Migrations\201508090031324_ChangeJobModel.Designer.cs">
+      <DependentUpon>201508090031324_ChangeJobModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508100150237_AddStatusToJob.cs" />
+    <Compile Include="Migrations\201508100150237_AddStatusToJob.Designer.cs">
+      <DependentUpon>201508100150237_AddStatusToJob.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508220539166_ModifyJobTable.cs" />
+    <Compile Include="Migrations\201508220539166_ModifyJobTable.Designer.cs">
+      <DependentUpon>201508220539166_ModifyJobTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ModelDI.cs" />
     <Compile Include="Models\MyDbContext.cs" />
     <Compile Include="Models\Job.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\Details\ProcessResult.cs" />
     <Compile Include="Services\Details\JobDetail.cs" />
     <Compile Include="Services\Implementation\JobQueueService.cs" />
     <Compile Include="Services\Interface\IJobQueueService.cs" />
@@ -268,10 +278,29 @@
     <EmbeddedResource Include="Migrations\201507190324508_AddCompletedDateTime.resx">
       <DependentUpon>201507190324508_AddCompletedDateTime.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508090031324_ChangeJobModel.resx">
+      <DependentUpon>201508090031324_ChangeJobModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508100150237_AddStatusToJob.resx">
+      <DependentUpon>201508100150237_AddStatusToJob.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508220539166_ModifyJobTable.resx">
+      <DependentUpon>201508220539166_ModifyJobTable.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MessageQueue.Common\MessageQueue.Common.csproj">
+      <Project>{8d7f199f-9497-483b-95c1-d049c55cba1a}</Project>
+      <Name>MessageQueue.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MessageQueue.MessageHelper\MessageQueue.MessageHelper.csproj">
+      <Project>{201d31fc-a7ba-4cbd-9d03-2305647fc7f8}</Project>
+      <Name>MessageQueue.MessageHelper</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -7,3 +7,9 @@
 /MessageQueue.Api/bin
 /MessageQueue.Api/obj
 /MessageQueue.Api/App_Data
+/MessageQueue.MessageHelper/bin
+/MessageQueue.MessageHelper/obj
+/MessageQueue.Consumer/obj
+/MessageQueue.Consumer/bin
+/MessageQueue.Common/obj
+/MessageQueue.Common/bin

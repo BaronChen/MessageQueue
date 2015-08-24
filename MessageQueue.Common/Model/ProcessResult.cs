@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
-namespace MessageQueue.Api.Services.Details
+namespace MessageQueue.Common.Model
 {
 	public class ProcessResult
 	{

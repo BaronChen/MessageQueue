@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using MessageQueue.Api.Services.Details;
 using MessageQueue.Api.Services.Interface;
+using MessageQueue.Common.Model;
 
 namespace MessageQueue.Api.Controllers
 {
@@ -26,7 +27,7 @@ namespace MessageQueue.Api.Controllers
         }
 
         // GET: api/Job/5
-        public string Get(int id)
+        public string Get(string id)
         {
             return "value";
         }
@@ -34,19 +35,53 @@ namespace MessageQueue.Api.Controllers
         // POST: api/Job
         public IHttpActionResult Post(JobDetail jobDetail)
         {
-	        jobDetail = jobQueueService.CreateJob(jobDetail);
+			jobDetail.RequestDateTime = DateTime.Now;
+
+			jobDetail = jobQueueService.CreateJob(jobDetail, Url.Link("DefaultApi", new { controller = "Process", action = "DoSomething" }),
+				Url.Link("DefaultApi", new { controller = "Job", action = "UpdateJobResultStatus" }), Url.Link("DefaultApi", new { controller = "job", action = "UpdateJobProcessStatus" }));
+
+	        if (jobDetail.ProcessResult.HasError())
+	        {
+		         return BadRequest(string.Join(";", jobDetail.ProcessResult.Errors));
+	        }
 
 	        return Ok<JobDetail>(jobDetail);
         }
 
         // PUT: api/Job/5
-        public void Put(int id, [FromBody]string value)
+		public void Put(string id, [FromBody]string value)
         {
         }
 
         // DELETE: api/Job/5
-        public void Delete(int id)
+		public void Delete(string id)
         {
         }
+
+		[HttpPost]
+		[HttpPut]
+	    public IHttpActionResult UpdateJobResultStatus(UpdateJobResultStatusModel updateJobResultStatusModel)
+		{
+			var processResult = jobQueueService.UpdateJobResultStatus(updateJobResultStatusModel);
+			if (processResult.HasError())
+			{
+				return BadRequest(string.Join(";", processResult.Errors));
+			}
+
+		    return Ok(processResult);
+	    }
+		
+		[HttpPost]
+		[HttpPut]
+		public IHttpActionResult UpdateJobProcessStatus(UpdateJobProcessStatusModel updateJobProcessStatusModel)
+	    {
+			var processResult = jobQueueService.UpdateJobProcessStatus(updateJobProcessStatusModel);
+			if (processResult.HasError())
+			{
+				return BadRequest(string.Join(";", processResult.Errors));
+			}
+		    return Ok(processResult);
+	    }
+
     }
 }

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using MessageQueue.Api.Models;
+using MessageQueue.Common.Enum;
+using MessageQueue.Common.Model;
 
 namespace MessageQueue.Api.Services.Details
 {
@@ -17,8 +19,12 @@ namespace MessageQueue.Api.Services.Details
 
 		public Guid Id { get; set; }
 
-		public DateTime RequestDateTime { get; set; }
+		public DateTime? RequestDateTime { get; set; }
 
-		public DateTime CompletedDateTime { get; set; }
+		public DateTime? CompletedDateTime { get; set; }
+
+		public ResultStatus ResultStatus { get; set; }
+
+		public ProcessStatus ProcessStatus { get; set; }
 	}
 }
