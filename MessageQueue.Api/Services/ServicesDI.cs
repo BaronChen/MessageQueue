@@ -9,11 +9,11 @@ using SimpleInjector;
 
 namespace MessageQueue.Api.Services
 {
-	public class ServucesDI
+	public class ServicesDI
 	{
 		public static void Confiure(Container container)
 		{
-			container.RegisterSingle<IJobQueueService, JobQueueService>();
+			container.Register<IJobQueueService, JobQueueService>();
 		}
 	}
 }

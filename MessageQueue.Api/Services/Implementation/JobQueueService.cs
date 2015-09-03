@@ -3,6 +3,7 @@ using System.Security.Policy;
 using MessageQueue.Api.Models;
 using MessageQueue.Api.Services.Details;
 using MessageQueue.Api.Services.Interface;
+using MessageQueue.Common.Enum;
 using MessageQueue.Common.Model;
 using MessageQueue.MessageHelper.Model;
 using MessageQueue.MessageHelper.Sender;
@@ -30,24 +31,21 @@ namespace MessageQueue.Api.Services.Implementation
 				CompletedDateTime = detail.CompletedDateTime
 			};
 
-			var messageSender = new MessageSender("testqueue");
-
-
-			var callBackMessage = new CallBackMessage()
-			{
-				Url = doJobUrl,
-				PlayLoad = "abcd",
-				JobId = job.Id.ToString(),
-				UpdateJobStatusUrl = updateStatusUrl,
-				CompleteJobUrl = completeJobUrl
-			};
+			job = MyDbContext.Jobs.Add(job);
+			MyDbContext.SaveChanges();
 
 			try
 			{
+				var messageSender = new MessageSender("testqueue");
+				var callBackMessage = new CallBackMessage()
+				{
+					Url = doJobUrl,
+					PlayLoad = "abcd",
+					JobId = job.Id.ToString(),
+					UpdateJobStatusUrl = updateStatusUrl,
+					CompleteJobUrl = completeJobUrl
+				};
 				messageSender.SendMessage(callBackMessage, job.Id.ToString());
-
-				MyDbContext.Jobs.Add(job);
-				MyDbContext.SaveChanges();
 
 				detail.Id = job.Id;
 				detail.ProcessResult.Messages.Add("Job Created.");
@@ -57,6 +55,8 @@ namespace MessageQueue.Api.Services.Implementation
 			catch (Exception e)
 			{
 				detail.ProcessResult.Errors.Add("Fail to crete job: " + e.Message +"\n" + e.StackTrace);
+				job.ProcessStatus = ProcessStatus.FailToPublish;
+				MyDbContext.SaveChanges();
 				return detail;
 			}
 		}

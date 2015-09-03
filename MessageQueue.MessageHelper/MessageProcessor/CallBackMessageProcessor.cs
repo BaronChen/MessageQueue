@@ -55,7 +55,11 @@ namespace MessageQueue.MessageHelper.MessageProcessor
 			{
 				var msg = GetBadResultMessage(updateResult.Result);
 
-				_consumerEventLog.WriteEntry("Fail to update job status ("+jobId+"): "+ msg);
+				_consumerEventLog.WriteEntry("Fail to update job status (" + jobId + "): " + msg);
+			}
+			else
+			{
+				_consumerEventLog.WriteEntry("Successful to update job status (" + jobId + ").");
 			}
 		}
 
@@ -74,6 +78,10 @@ namespace MessageQueue.MessageHelper.MessageProcessor
 				var msg = GetBadResultMessage(completeResult.Result);
 
 				_consumerEventLog.WriteEntry("Fail to complete jobs (" + jobId + "): " + msg);
+			}
+			else
+			{
+				_consumerEventLog.WriteEntry("Successful to complete job (" + jobId + ").");
 			}
 		}
 

@@ -16,6 +16,7 @@ namespace MessageQueue.Common.Enum
 	public enum ProcessStatus
 	{
 		Processing,
-		Completed
+		Completed,
+		FailToPublish
 	}
 }

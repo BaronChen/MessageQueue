@@ -29,7 +29,7 @@ namespace MessageQueue.Api
 		
 			ModelDI.Confiure(container);
 
-			ServucesDI.Confiure(container);
+			ServicesDI.Confiure(container);
 
 			container.RegisterWebApiControllers(GlobalConfiguration.Configuration);
 

@@ -204,7 +204,7 @@
     <Compile Include="Services\Details\JobDetail.cs" />
     <Compile Include="Services\Implementation\JobQueueService.cs" />
     <Compile Include="Services\Interface\IJobQueueService.cs" />
-    <Compile Include="Services\ServucesDI.cs" />
+    <Compile Include="Services\ServicesDI.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
