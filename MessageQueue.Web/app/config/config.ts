@@ -3,6 +3,7 @@
 	export class Config {
 		
 		constructor($stateProvider: ng.ui.IStateProvider, $urlRouterProvider: ng.ui.IUrlRouterProvider) {
+
 			$urlRouterProvider.otherwise("/home");
 
 			$stateProvider
@@ -10,7 +11,12 @@
 				url: "/home",
 				templateUrl: "app/view/app.html"
 			});
+
 		}
+	}
+
+	export class CommonSetting {
+		public static seriveBaseUrl: string = "http://localhost:5279/"; 		
 	}
 }
 

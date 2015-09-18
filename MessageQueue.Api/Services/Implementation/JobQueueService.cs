@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Security.Policy;
 using MessageQueue.Api.Models;
 using MessageQueue.Api.Services.Details;
@@ -115,6 +117,27 @@ namespace MessageQueue.Api.Services.Implementation
 			}
 
 			return result;
+		}
+
+		public List<JobDetail> QueryJobsStatus(List<string> jobIds)
+		{
+			var jobs = MyDbContext.Jobs.Where(x => jobIds.Contains(x.Id.ToString()));
+
+			var details = jobs.Select(MapToDetail).ToList();
+
+			return details;
+		}
+
+		private JobDetail MapToDetail(Job job)
+		{
+			return new JobDetail()
+			{
+				Id = job.Id,
+				CompletedDateTime = job.CompletedDateTime,
+				ProcessStatus = job.ProcessStatus,
+				RequestDateTime = job.RequestDateTime,
+				ResultStatus = job.ResultStatus
+			};
 		}
 	}
 }

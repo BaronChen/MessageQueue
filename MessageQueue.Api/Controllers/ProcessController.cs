@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Web.Http;
 using MessageQueue.Api.Services.Details;
 using MessageQueue.Api.Services.Interface;
@@ -22,6 +23,7 @@ namespace MessageQueue.Api.Controllers
 	    [HttpPost]
 	    public IHttpActionResult DoSomething()
 	    {
+			Thread.Sleep(1000);
 			return Ok();
 	    }
 
@@ -43,8 +45,24 @@ namespace MessageQueue.Api.Controllers
 				return BadRequest(string.Join(";", jobDetail.ProcessResult.Errors));
 			}
 
-			return Ok(new {message = "Process Task Created."});
+			return Ok(new {jobId = jobDetail.Id, message = "Process Task Created."});
 	    }
+
+	    [HttpPost]
+		[HttpPut]
+	    public IHttpActionResult QueryProcessTaskStatus(JobsInQueue jobsInQueue)
+	    {
+		    var details = jobQueueService.QueryJobsStatus(jobsInQueue.CreatedJobIds);
+
+		    jobsInQueue.CompleteJobIds = details.Where(x => x.ProcessStatus == ProcessStatus.Completed).Select( x=> x.Id.ToString()).ToList();
+		    jobsInQueue.ErrorJobIds = details.Where(x => x.ProcessStatus == ProcessStatus.FailToPublish || x.ResultStatus == ResultStatus.Error).Select( x=> x.Id.ToString()).ToList();
+		    jobsInQueue.ProcessingJobIds = details.Where(x => x.ProcessStatus == ProcessStatus.Processing).Select( x=> x.Id.ToString()).ToList();
+		    jobsInQueue.SuccessJobIds = details.Where(x => x.ResultStatus == ResultStatus.Success).Select( x=> x.Id.ToString()).ToList();
+
+		    return Ok(jobsInQueue);
+	    }
+
+
 
     }
 }

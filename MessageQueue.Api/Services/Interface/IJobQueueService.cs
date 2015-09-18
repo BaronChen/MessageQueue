@@ -14,5 +14,7 @@ namespace MessageQueue.Api.Services.Interface
 
 		ProcessResult UpdateJobResultStatus(UpdateJobResultStatusModel model);
 		ProcessResult UpdateJobProcessStatus(UpdateJobProcessStatusModel model);
+
+		List<JobDetail> QueryJobsStatus(List<string> jobIds);
 	}
 }
